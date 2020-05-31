@@ -36,9 +36,10 @@ pipeline {
                branch 'master'
             }
             script{
-                   app = docker.build(REPOSITORY_TAG)  
-                   docker.withRegistry('https://registry.hub.docker.com','docker_hub_login')
-                   app.push('latest')
+               app = docker.build(REPOSITORY_TAG)  
+               docker.withRegistry('https://registry.hub.docker.com','docker_hub_login'){
+                  app.push('latest')
+               }
             }
          }
       }
