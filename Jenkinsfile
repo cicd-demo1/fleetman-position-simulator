@@ -31,17 +31,19 @@ pipeline {
       }
 */
       stage('Build and push image'){
-         steps {
-            when {
+        when {
                branch 'master'
-            }
+         }
+         steps {
             script{
                app = docker.build(REPOSITORY_TAG)  
                docker.withRegistry('https://registry.hub.docker.com','docker_hub_login'){
                   app.push('latest')
                }
             }
+
          }
+         
       }
       
       stage('Deploy to Cluster') {
