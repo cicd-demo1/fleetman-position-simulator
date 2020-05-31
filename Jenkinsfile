@@ -35,13 +35,11 @@ pipeline {
             when {
                branch 'master'
             }
-            steps {
-               script{
+            script{
                    app = docker.build(REPOSITORY_TAG)  
                    docker.withRegistry('https://registry.hub.docker.com','docker_hub_login')
                    app.push('latest')
-               }
-             }
+            }
          }
       }
       
